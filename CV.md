@@ -5,7 +5,7 @@ Kathryn Judy
 
 
 --------------------    --------------------
-~~Address Line 1~~           kjjudy@uark.edu
+~~Address Line 1~~           <kjjudy@uark.edu>
 ~~Address Line 2~~             \(469\)215-9615
 
 Education
