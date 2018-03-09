@@ -12,7 +12,7 @@ Plano, TX 75025
 
 #### Education
 
-**Bachelor of Science in Biology**
+***Bachelor of Science in Biology***
 
 *Expected: Spring 2020*                                                             
 
@@ -38,15 +38,15 @@ Weighted GPA: 4.52
 
 #### Campus Involvement
 
-**Eta Sigma Phi Classics Honors Society Member**  
+***Eta Sigma Phi Classics Honors Society Member***  
 
 *December 2016- Present*
 
-**Founding Member of University of Arkansas Coexist** 
+***Founding Member of University of Arkansas Coexist*** 
 
 *August 2017- Present*
 
-**Honors College Ambassador** 
+***Honors College Ambassador*** 
 
 *Fall 2016- Present*
 
@@ -56,7 +56,7 @@ Weighted GPA: 4.52
 
 #### Scholarships
 
-**Honors College Fellowship**      
+***Honors College Fellowship***      
 
 *2016- Present*
 
@@ -66,7 +66,7 @@ Weighted GPA: 4.52
 
 #### Work Experience
 
-**Customer Service Representative for Domino's Pizza** 
+***Customer Service Representative for Domino's Pizza*** 
 
 *Aug 2015- Aug 2016*
 
