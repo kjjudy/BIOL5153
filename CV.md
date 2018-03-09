@@ -1,8 +1,12 @@
 ### Kathryn Judy
 
-3836 Rolling Hills Dr                                                                                          <kjjudy@uark.edu>
+3836 Rolling Hills Dr                                                                                         
 
-Plano, TX 75025                                                                                                      \(469)215-9615
+:<kjjudy@uark.edu>
+
+Plano, TX 75025                                                                                                    
+
+:\(469)215-9615
 
 
 
@@ -10,7 +14,7 @@ Plano, TX 75025                                                                 
 
 **Bachelor of Science in Biology**                                                               *Expected: Spring 2020*
 
-######University of Arkansas, Fayetteville AR
+University of Arkansas, Fayetteville AR
 
 GPA: 4.0
 
@@ -22,7 +26,7 @@ Dean's List 2017
 
 High School Diploma                                                                                                  *Spring 2016*
 
-######Plano Senior High School, Plano TX
+Plano Senior High School, Plano TX
 
 Weighted GPA: 4.52
 
@@ -36,7 +40,7 @@ Weighted GPA: 4.52
 
 **Honors College Ambassador**                                                                        *Fall 2016- Present*
 
-​      *Volunteered at 2+ campus events a year for the betterment of the University and Honors College Programs
+​      -Volunteered at 2+ campus events a year for the betterment of the University and Honors College Programs
 
 
 
@@ -44,7 +48,7 @@ Weighted GPA: 4.52
 
 **Honors College Fellowship**                                                                                   *2016- Present* 
 
-​      *Received a competitive four-year undergraduate fellowhship from the University of Arkansas      Honors College
+​      -Received a competitive four-year undergraduate fellowhship from the University of Arkansas      Honors College
 
 
 
@@ -58,8 +62,8 @@ Weighted GPA: 4.52
 
 ​                                                                                                                           *Dec 2017- Jan 2017*
 
-​      *Worked 20-30 hours per week
+​      -Worked 20-30 hours per week
 
-​      *Utilized time management and multitasking skills to complete multiple simultaneous tasks including providing excellent customer service, designating driver assignments, and performing quick, accurate meal prep
+​      -Utilized time management and multitasking skills to complete multiple simultaneous tasks including providing excellent customer service, designating driver assignments, and performing quick, accurate meal prep
 
-​      *Responded to and assuaged customer concerns
+​      -Responded to and assuaged customer concerns
