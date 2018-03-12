@@ -4,9 +4,7 @@
 
 Plano, TX 75025
 
-<kjjudy@uark.edu>                                                                                                  
-
-\(469)215-9615
+<kjjudy@uark.edu> 
 
 
 
