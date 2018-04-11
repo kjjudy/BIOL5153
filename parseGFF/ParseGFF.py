@@ -27,10 +27,15 @@ file=open(args.gff)
 #give list input each line of .gff file
 for line in file:
 
-#split each line into lists of strings at the tab 
+#split each line into lists of strings at the tab
 	list=line.split("\t")
-	print(">"+list[0])
-	print(genome[(int(list[3])-1):(int(list[4])-1)])
+	attribute=list[8].split(";")
+	gene_info=attribute[0].split()
+#gene_name=gene_info[1], intron/exon=gene_info[2:3] but not always present-write as if/else to prevent code failure
+
+	#print(gene_info[1])
+	print(">"+list[0],gene_info[1])
+	#print(genome[(int(list[3])-1):(int(list[4])-1)])
 #print some "header info" (organism name, intron/exon, etc in .fasta style)
 
 #print data from genome at coordinates
