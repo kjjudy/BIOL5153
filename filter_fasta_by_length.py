@@ -4,11 +4,12 @@
 #load the required modules
 import argparse
 from Bio import SeqIO
+from io import StringIO
 
 #create an ArgumentParser object ('parser') that will hold all the info to parse the command line
 parser=argparse.ArgumentParser(description="This script filters out sequences from a FASTA file that are shorter than a user-specified length cutoff")
 
-#add arguments (two types: required [positional-when/where they are entered in the command line is meaningful] vs optional 
+#add arguments (two types: required [positional-when/where they are entered in the command line is meaningful] vs optional
 #positional arguments added with add.argument() method
 #argparse treats all options as strings by default
 parser.add_argument("fasta", help="name of FASTA file")
@@ -23,3 +24,12 @@ args=parser.parse_args()
 #grab the values
 print("We're going to open this FASTA file:", args.fasta)
 print("filter sequences less than", args.lengthMin, "nt in length")
+
+#print sequences >args.lengthMin to STDOUT
+for sequence in SeqIO.parse(args.fasta,"fasta"):
+    #write if statement so only longer sequences continue
+    if len(sequence.seq) > args.lengthMin:
+        out_handle=StringIO()
+        SeqIO.write(sequence, out_handle, "fasta")
+        fasta_data=out_handle.getvalue()
+        print(fasta_data)
