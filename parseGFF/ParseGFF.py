@@ -40,11 +40,11 @@ def gff_parse(f,g):
 		gene_info=attribute[0].split()
 		#gene_name=gene_info[1], intron/exon=gene_info[2:3] but not always present-write as if/else to prevent code failure
 
-		#provide FASTA style header- >organism gene (more later)
-		return ">"+list[0]+"_"+gene_info[1]
+		header=">"+list[0]+"_"+gene_info[1]
+		body=rev_comp_test(list,genome)
 
-		#return nt sequence or reverse complement (uses following function)
-		return rev_comp_test(list,genome)
+		return header+"\n"+body
+#currently quits after one iteration of for loop bc of return... how to fix?
 
 		#close .gff file
 	file.close()
