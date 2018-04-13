@@ -32,6 +32,10 @@ def gff_parse(f,g):
 	#open .gff file
 	file=open(g)
 
+	#create lists for adding values
+	header=[]
+	body=[]
+
 	#give list input each line of .gff file
 	for line in file:
 		#split each line into lists of strings at the tab
@@ -40,10 +44,12 @@ def gff_parse(f,g):
 		gene_info=attribute[0].split()
 		#gene_name=gene_info[1], intron/exon=gene_info[2:3] but not always present-write as if/else to prevent code failure
 
-		header=">"+list[0]+"_"+gene_info[1]
-		body=rev_comp_test(list,genome)
+		header.append(">"+list[0]+"_"+gene_info[1])
+		body.append(rev_comp_test(list,genome))
 
-		return header+"\n"+body
+	length=len(header)
+
+	return header,body,length
 #currently quits after one iteration of for loop bc of return... how to fix?
 
 		#close .gff file
@@ -56,12 +62,15 @@ def rev_comp_test(list,genome):
 	if list[6] == "+":
 		return genome[(int(list[3])-1):(int(list[4])-1)]
 	else:
-		rev_comp=reverse_complement(genome[(int(list[3])-1):(int(list[4])-1)])
+		rev_comp=(genome[(int(list[3])-1):(int(list[4])-1)]).reverse_complement
 		return rev_comp
 
 #define main function (connects all the modular pieces)
 def main():
-	print(gff_parse(args.fasta,args.gff))
+	header,body,length=gff_parse(args.fasta,args.gff)
+	for i in range(length):
+		print(header[i])
+		print(body[i])
 
 #call command-line arguments
 args=get_args()
