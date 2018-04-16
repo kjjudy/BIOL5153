@@ -4,7 +4,6 @@
 #load the modules
 import argparse
 from Bio import SeqIO
-from io import StringIO
 
 #create an ArgumentParser object ('parser') to hold all info from command line
 parser=argparse.ArgumentParser(description="This script filters out sequences from a FASTA file that match sequence identifiers and prints the remaining sequences in FASTA format")
@@ -24,39 +23,11 @@ print("Sequences with identifiers from the list", args.seqIDs, "will not be prin
 
 #print sequences not listed to STDOUT:
 
-#build index of records from FASTA file (accessible by record.id)
-record_dict = SeqIO.index(args.fasta, "fasta")
-
 #create list of seqIDs values
-IDs=open(args.seqIDs).readlines()
+IDs=open(args.seqIDs).read().splitlines()
 
-#determine number of times to iterate over list
-n=len(IDs)
-
-#create an empty list to fill with sequence.id values
-SeqList=[]
-
-#fill list with values
+#print files that do not match the list
 for sequence in SeqIO.parse(args.fasta,"fasta"):
-    SeqList.append(sequence.id)
-
-    #based on number of IDs in seqIDs file, iterate over IDs in seqID list
-    for i in range(n):
-        if sequence.id == IDs[i]:
-            SeqList.remove(sequence.id)
-
-#print remaining FASTA files by their sequence.id using SeqIO
-for record in SeqList:
-    #pull record info from index by identifier remaining in list
-    data=record_dict[record]
-
-    #write output into FASTA format
-    out_handle=StringIO()
-    SeqIO.write(data, out_handle, "fasta")
-    fasta_data=out_handle.getvalue()
-    print(fasta_data)
-
-#WHY DOESNT THIS WORK
-
-#close index
-record_dict.close()
+    if sequence.id not in IDs:
+    #print files by sequence.id using SeqIO
+        print(sequence.format("fasta"))

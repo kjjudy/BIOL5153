@@ -4,7 +4,6 @@
 #load the required modules
 import argparse
 from Bio import SeqIO
-from io import StringIO
 
 #create an ArgumentParser object ('parser') that will hold all the info to parse the command line
 parser=argparse.ArgumentParser(description="This script filters out sequences from a FASTA file that are shorter than a user-specified length cutoff")
@@ -29,7 +28,4 @@ print("filter sequences less than", args.lengthMin, "nt in length")
 for sequence in SeqIO.parse(args.fasta,"fasta"):
     #write if statement so only longer sequences continue
     if len(sequence.seq) > args.lengthMin:
-        out_handle=StringIO()
-        SeqIO.write(sequence, out_handle, "fasta")
-        fasta_data=out_handle.getvalue()
-        print(fasta_data)
+        print(sequence.format("fasta"))

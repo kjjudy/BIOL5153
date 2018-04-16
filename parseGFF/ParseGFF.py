@@ -62,8 +62,25 @@ def rev_comp_test(list,genome):
 	if list[6] == "+":
 		return genome[(int(list[3])-1):(int(list[4])-1)]
 	else:
-		rev_comp=(genome[(int(list[3])-1):(int(list[4])-1)]).reverse_complement
-		return rev_comp
+		reverse_complement=rev_comp(genome[(int(list[3])-1):(int(list[4])-1)])
+		return reverse_complement
+
+#write function that calculates reverse complement
+def rev_comp(DNAseq):
+	#turn object into string and ensure all DNA is uppercase
+	dna=str(DNAseq.upper())
+
+	#change bases to lowercase complement
+	a_comp=(dna.replace("A", "t"))
+	t_comp=(a_comp.replace("T", "a"))
+	c_comp=(t_comp.replace("C", "g"))
+	g_comp=(c_comp.replace("G", "c"))
+
+	#return to uppercase
+	dna_comp=g_comp.upper()
+
+	#return reverse complement
+	return dna_comp[::-1]
 
 #define main function (connects all the modular pieces)
 def main():
