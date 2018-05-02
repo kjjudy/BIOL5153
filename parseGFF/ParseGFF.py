@@ -8,7 +8,7 @@ import os
 import re
 import argparse
 from Bio import SeqIO
-
+from collections import defaultdict
 #define functions
 
 #write function to take specific command-line input with argparse
@@ -40,57 +40,40 @@ def gff_parse(f,g):
 	#open .gff file
 	file=open(g)
 
-	#create lists for adding values
-	#header=[]
-	#body=[]
+	#make dictionary to fill with names,sequence_lists (k,v)
+	data=defaultdict(list)
+
+	#make list for gene names (to build lists from)
+	list_list=[]
 
 	#give list input each line of .gff file
 	for line in file:
 		#split each line into lists of strings at the tab
 		(seqid, source, feature, start, end, length, strand, frame, attributes)=line.split("\t")
-		#list=line.split("\t")
-		#attribute=attributes.split(" ; ")
-		#gene_info=attribute[0].split()
-		#gene_name=gene_info[1], intron/exon=gene_info[2:3] but not always present-write as if/else to prevent code failure
+
 		#pull out exons for further processing:
 		if(feature=="CDS" or feature=="tRNA" or feature=="rRNA"):
 			atts=attributes.split(" ; ")
 			gene_name=re.search("^Gene\s+(\S+)" , atts[0])
-			exon=re.search("exon\s+(\d+)")
-			if(gene_name and exon):
-				print(">"+seqid.replace(" ","_")+"_"+gene_name.group(1)+"_"exon.group(1))
-				#header.append(">"+seqid.replace(" ","_")+"_"+gene_name.group(1)+"_"exon.group(1))
-			else:
-				print(">"+seqid.replace(" ","_")+"_"+gene_name.group(1))
-				#header.append(">"+seqid.replace(" ","_")+"_"+gene_name.group(1))
+			#exon=re.search("exon\s+(\d+)")
+
+			g_name=gene_name.group(1)
+		#make list for exon position value(s) (or not if preexisting)
 
 			if strand == "+":
-				print(f[(int(start)-1):(int(end)])
+				list_list.append((g_name, f[(int(start)-1):(int(end))]))
 
 			else:
-				print(rev_comp(genome[(int(start)-1):(int(end)])
-			#body.append(rev_comp_test(start,end,strand,f))
-		#header.append(">"+list[0]+"_"+gene_info[1])
-		#body.append(rev_comp_test(list,genome))
+				list_list.append((g_name, rev_comp(f[(int(start)-1):(int(end))])))
 
-	length=len(header)
+	for gene, sequence in list_list:
+		data[gene].append(sequence)
 
-	#return header,body,length
-	return length
-#currently quits after one iteration of for loop bc of return... how to fix?
+
+	return data,seqid
 
 		#close .gff file
 	file.close()
-
-#write function to calc reverse complement if needed
-#def rev_comp_test(start,end,strand,genome):
-#not fixed if list[6] is made into a variable, or if moved above prev
-	#determine if strand is + or -, calculate reverse complement of - strand nt
-	#if strand == "+":
-		#return genome[(int(start)-1):(int(end)]
-	#else:
-		#reverse_complement=rev_comp(genome[(int(start)-1):(int(end)])
-		#return reverse_complement
 
 #write function that calculates reverse complement
 def rev_comp(DNAseq):
@@ -109,15 +92,17 @@ def rev_comp(DNAseq):
 	#return reverse complement
 	return dna_comp[::-1]
 
+#write function to print pieces
+def seqprint(data,seqid):
+	for gene,sequences in data.items():
+		print(">"+seqid.replace(" ","_")+"_"+gene)
+		print(sequences)
+
 #define main function (connects all the modular pieces)
 def main():
 	genome=fasta_parse(args.fasta)
-	parse_gff()
-	#header,body,length=gff_parse(genome,args.gff)
-
-	#for i in range(length):
-		#print(header[i])
-		#print(body[i])
+	dictionary,seqname=gff_parse(genome,args.gff)
+	seqprint(dictionary,seqname)
 
 #call command-line arguments
 args=get_args()
