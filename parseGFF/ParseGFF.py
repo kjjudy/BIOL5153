@@ -41,11 +41,8 @@ def gff_parse(f,g):
 	file=open(g)
 
 	#make dictionary to fill with names,sequence_lists (k,v)
-	data=defaultdict(list)
-
-	#make list for gene names (to build lists from)
-	list_list=[]
-
+	data = {}
+	#data=defaultdict(list)
 	#give list input each line of .gff file
 	for line in file:
 		#split each line into lists of strings at the tab
@@ -55,25 +52,39 @@ def gff_parse(f,g):
 		if(feature=="CDS" or feature=="tRNA" or feature=="rRNA"):
 			atts=attributes.split(" ; ")
 			gene_name=re.search("^Gene\s+(\S+)" , atts[0])
-			#exon=re.search("exon\s+(\d+)")
+			exon=re.search("exon\s+(\d+)", atts[0])
+			#g_name=gene_name.group(1)
 
-			g_name=gene_name.group(1)
-		#make list for exon position value(s) (or not if preexisting)
+			#if gene + exon defined + gene has multiple exons, store fragment in dictionary
+			#make list for exon position value(s) (or not if preexisting)
+			if (gene_name and exon):
+				if gene_name.group(1) in data:
+					#dictionary[key][list_position]=value_for_that_list_position
+					data[gene_name.group(1)][int(exon.group(1))] = get_seq(f,start,end,strand)
 
-			if strand == "+":
-				list_list.append((g_name, f[(int(start)-1):(int(end))]))
+				#initialize dictionary (tells program that value assoc. with key is a list "[]")
+				#"defaultdict(list)" would be an alternate to "[]"
+				else:
+					data[gene_name.group(1)] = defaultdict(list)
+					data[gene_name.group(1)][int(exon.group(1))] = get_seq(f,start,end,strand)
 
+			#if only gene_name defined (no exons), print immediately
 			else:
-				list_list.append((g_name, rev_comp(f[(int(start)-1):(int(end))])))
-
-	for gene, sequence in list_list:
-		data[gene].append(sequence)
-
+				print(">"+seqid.replace(" ","_")+"_"+gene_name.group(1))
+				print(get_seq(f,start,end,strand))
 
 	return data,seqid
 
-		#close .gff file
+	#close .gff file
 	file.close()
+
+#write function to get DNA fragment sequences
+def get_seq(DNA, start, end, strand):
+	if strand == "+":
+		return DNA[(int(start)-1):(int(end))]
+
+	else:
+		return rev_comp(DNA[(int(start)-1):(int(end))])
 
 #write function that calculates reverse complement
 def rev_comp(DNAseq):
@@ -96,7 +107,13 @@ def rev_comp(DNAseq):
 def seqprint(data,seqid):
 	for gene,sequences in data.items():
 		print(">"+seqid.replace(" ","_")+"_"+gene)
-		print(sequences)
+		#initialize a new variable that will hold the CDS sequence
+		cds = ''
+		#asseble CDS sequence by looping over sequneces and appending
+		for i in sorted(sequences.keys()):
+			#print(i)
+			cds += sequences[i]
+		print(cds)
 
 #define main function (connects all the modular pieces)
 def main():
